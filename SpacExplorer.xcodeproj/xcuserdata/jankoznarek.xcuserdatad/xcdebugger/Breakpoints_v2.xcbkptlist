@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "309DBA05-FEFB-4567-A366-544889E16A30"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "64A88DF9-01AF-4087-8EE1-43CEE3347B2D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpacExplorer/Core/Components/NetworkImage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "fetchImage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "64A88DF9-01AF-4087-8EE1-43CEE3347B2D - 7065bfe01e9cf5aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpacExplorer.NetworkImage.fetchImage() -&gt; ()"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Core/Components/NetworkImage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1004">
+               </Location>
+               <Location
+                  uuid = "64A88DF9-01AF-4087-8EE1-43CEE3347B2D - 7065bfe01e9cf5aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpacExplorer.NetworkImage.fetchImage() -&gt; ()"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Core/Components/NetworkImage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1264">
+               </Location>
+               <Location
+                  uuid = "64A88DF9-01AF-4087-8EE1-43CEE3347B2D - 7065bfe01e9cf5aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpacExplorer.NetworkImage.fetchImage() -&gt; ()"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Core/Components/NetworkImage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1400">
+               </Location>
+               <Location
+                  uuid = "64A88DF9-01AF-4087-8EE1-43CEE3347B2D - 7065bfe01e9cf5aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpacExplorer.NetworkImage.fetchImage() -&gt; ()"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Core/Components/NetworkImage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "968">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
