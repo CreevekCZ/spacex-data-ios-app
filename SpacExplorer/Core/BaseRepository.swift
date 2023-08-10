@@ -8,14 +8,16 @@
 import Foundation
 
 class BaseRepository<T: Codable> {
-	var host: URL
+	private let host: URL
+	private let session: URLSession
 
-	init(host: URL) {
+	init(host: URL, session: URLSession = .shared) {
 		self.host = host
+		self.session = session
 	}
 
 	private func composeUrl(uri: String) -> URL? {
-		let finalUrl = host.absoluteString + uri
+		let finalUrl = self.host.absoluteString + uri
 
 		return URL(string: finalUrl)
 	}
@@ -27,66 +29,57 @@ class BaseRepository<T: Codable> {
 		return decoder
 	}
 
-	func readAll(uri: String, completion: @escaping (Result<[T], Error>) -> Void) {
+	func readAll(uri: String) async throws -> [T] {
 		guard let url = composeUrl(uri: uri) else {
-			completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-			return
+			throw RepositoryError.invalidUrl
 		}
 
 		let request = URLRequest(url: url)
 
-		URLSession.shared.dataTask(with: request) { data, _, error in
+		do {
+			let (data, _) = try await session.data(for: request)
 
-			if let error = error {
-				completion(.failure(error))
-				return
+			let decoder = self.getDecoder()
+
+			let result = try decoder.decode([T].self, from: data)
+
+			return result
+		} catch {
+			switch error {
+			case let urlError as URLError:
+				throw RepositoryError.networkError(urlError)
+			case let decodingError as DecodingError:
+				throw RepositoryError.decodingError(decodingError)
+			default:
+				throw error
 			}
-
-			guard let data = data else {
-				completion(.failure(NSError(domain: "No data", code: 0)))
-				return
-			}
-
-			do {
-				let decoder = self.getDecoder()
-
-				let result = try decoder.decode([T].self, from: data)
-
-				completion(.success(result))
-			} catch {
-				completion(.failure(error))
-			}
-		}.resume()
+		}
 	}
 
-	func readOne(uri: String, completion: @escaping (Result<T, Error>) -> Void) {
+	func readOne(uri: String) async throws -> T {
 		guard let url = composeUrl(uri: uri) else {
-			completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-			return
+			throw RepositoryError.invalidUrl
 		}
 
 		let request = URLRequest(url: url)
 
-		URLSession.shared.dataTask(with: request) { data, _, error in
-			print("TEST")
-			if let error = error {
-				completion(.failure(error))
+		do {
+			let (data, _) = try await session.data(for: request)
+
+			let decoder = self.getDecoder()
+
+			let result = try decoder.decode(T.self, from: data)
+
+			return result
+		} catch {
+			switch error {
+			case let urlError as URLError:
+				throw RepositoryError.networkError(urlError)
+			case let decodingError as DecodingError:
+				throw RepositoryError.decodingError(decodingError)
+			default:
+				throw error
 			}
-
-			guard let data = data else {
-				completion(.failure(NSError(domain: "No data", code: 0)))
-				return
-			}
-
-			do {
-				let decoder = self.getDecoder()
-
-				let result = try decoder.decode(T.self, from: data)
-
-				completion(.success(result))
-			} catch {
-				completion(.failure(error))
-			}
-		}.resume()
+		}
 	}
 }

@@ -31,19 +31,7 @@ struct LaunchDetailView: View {
 			TableItem(title: "Name", value: launch.name)
 			TableItem(title: "Detail", value: launch.details)
 
-			Button("TEST") {
-				LaunchRepository(host: URL(string: "https://api.spacexdata.com/v4/launches/")!).getAll { result in
-
-					switch result {
-					case .success(let launch):
-						print(launch.first?.details)
-						return
-					case .failure(let error):
-						print(error)
-						return
-					}
-				}
-			}
+			Button("TEST") {}
 
 			Spacer()
 		}

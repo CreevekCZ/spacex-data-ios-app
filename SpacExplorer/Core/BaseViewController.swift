@@ -8,11 +8,21 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, LaunchesViewModelDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		setupBackgroundColor()
+	}
+
+	func showError(errorMessage: String) {
+		DispatchQueue.main.sync { [weak self] in
+			let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+
+			alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+			self?.present(alert, animated: true)
+		}
 	}
 
 	func setPrefersLargeTitles(_ value: Bool) {

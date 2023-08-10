@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1023646E2A84E65C001B2D91 /* LaunchesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */; };
+		102364702A84FBDE001B2D91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023646F2A84FBDE001B2D91 /* Constants.swift */; };
+		102364732A85172F001B2D91 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102364722A85172F001B2D91 /* RepositoryError.swift */; };
 		1069B3792A7BDD9E00EEDFBD /* LaunchesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B3782A7BDD9E00EEDFBD /* LaunchesListViewController.swift */; };
 		1069B37C2A7CF43C00EEDFBD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37B2A7CF43C00EEDFBD /* BaseViewController.swift */; };
 		1069B37E2A7D0B0800EEDFBD /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37D2A7D0B0800EEDFBD /* Launch.swift */; };
@@ -47,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesFilter.swift; sourceTree = "<group>"; };
+		1023646F2A84FBDE001B2D91 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		102364722A85172F001B2D91 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		1069B3782A7BDD9E00EEDFBD /* LaunchesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesListViewController.swift; sourceTree = "<group>"; };
 		1069B37B2A7CF43C00EEDFBD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1069B37D2A7D0B0800EEDFBD /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
@@ -97,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		102364712A851711001B2D91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				102364722A85172F001B2D91 /* RepositoryError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1069B3702A7B83C300EEDFBD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,11 +123,13 @@
 		1069B3712A7B83D700EEDFBD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				102364712A851711001B2D91 /* Model */,
 				107B1B532A81034200BC3FB8 /* Components */,
 				109378252A7942D200CC58E8 /* AppDelegate.swift */,
 				109378272A7942D200CC58E8 /* SceneDelegate.swift */,
 				1069B37B2A7CF43C00EEDFBD /* BaseViewController.swift */,
 				107B1B5B2A81357800BC3FB8 /* BaseRepository.swift */,
+				1023646F2A84FBDE001B2D91 /* Constants.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -122,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				1069B37D2A7D0B0800EEDFBD /* Launch.swift */,
+				1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,12 +411,15 @@
 			files = (
 				1069B37C2A7CF43C00EEDFBD /* BaseViewController.swift in Sources */,
 				1093782A2A7942D200CC58E8 /* ViewController.swift in Sources */,
+				1023646E2A84E65C001B2D91 /* LaunchesFilter.swift in Sources */,
 				107B1B5E2A824CEC00BC3FB8 /* LaunchesViewModel.swift in Sources */,
 				107B1B4E2A80DEEA00BC3FB8 /* LaunchTableViewCell.swift in Sources */,
+				102364702A84FBDE001B2D91 /* Constants.swift in Sources */,
 				107B1B502A80E99900BC3FB8 /* LaunchDetailView.swift in Sources */,
 				109378262A7942D200CC58E8 /* AppDelegate.swift in Sources */,
 				107B1B572A810F1200BC3FB8 /* TableItem.swift in Sources */,
 				107B1B5C2A81357800BC3FB8 /* BaseRepository.swift in Sources */,
+				102364732A85172F001B2D91 /* RepositoryError.swift in Sources */,
 				1069B3792A7BDD9E00EEDFBD /* LaunchesListViewController.swift in Sources */,
 				1069B37E2A7D0B0800EEDFBD /* Launch.swift in Sources */,
 				107B1B552A81036200BC3FB8 /* NetworkImage.swift in Sources */,

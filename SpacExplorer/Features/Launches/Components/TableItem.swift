@@ -17,7 +17,7 @@ struct TableItem: View {
 	}
 
 	var body: some View {
-		HStack {
+		HStack(alignment: .top) {
 			Text(title ?? "")
 				.fontWeight(.bold)
 

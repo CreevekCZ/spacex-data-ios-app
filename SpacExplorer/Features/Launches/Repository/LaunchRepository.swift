@@ -7,35 +7,32 @@
 
 import Foundation
 
-class LaunchRepository: BaseRepository<Launch> {
-	override init(host: URL) {
-		super.init(host: host)
+protocol LaunchRepository {
+	func getLaunch(launchId: String) async throws -> Launch
+	func getAll() async throws -> [Launch]
+}
+
+class ImplLaunchRepository: BaseRepository<Launch>, LaunchRepository {
+	override init(host: URL, session: URLSession = .shared) {
+		super.init(host: host, session: session)
 	}
 
-	func getLaunch(launchId: String, completion: @escaping (Result<Launch, Error>) -> Void) {
-		readOne(uri: launchId) { result in
-			switch result {
-			case .success(let launch):
-				print(launch.id)
-				completion(.success(launch))
-				return
-			case .failure(let error):
-				completion(.failure(error))
-				return
-			}
+	func getLaunch(launchId: String) async throws -> Launch {
+		do {
+			let launch = try await readOne(uri: "/launches/" + launchId)
+			print(launch.id)
+			return launch
+		} catch {
+			throw error
 		}
 	}
 
-	func getAll(completion: @escaping (Result<[Launch], Error>) -> Void) {
-		readAll(uri: "") { result in
-			switch result {
-			case .success(let launches):
-				completion(.success(launches))
-				return
-			case .failure(let error):
-				completion(.failure(error))
-				return
-			}
+	func getAll() async throws -> [Launch] {
+		do {
+			let launches = try await readAll(uri: "/launches")
+			return launches
+		} catch {
+			throw error
 		}
 	}
 }
