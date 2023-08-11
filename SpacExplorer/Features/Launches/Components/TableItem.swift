@@ -26,6 +26,7 @@ struct TableItem: View {
 			Text(value ?? "")
 				.textSelection(.enabled)
 		}
+		.padding(.vertical, 2)
 	}
 }
 

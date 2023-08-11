@@ -11,33 +11,43 @@ struct LaunchDetailView: View {
 	let launch: Launch
 
 	var body: some View {
-		VStack(alignment: .leading) {
-			RoundedRectangle(cornerRadius: 8)
-				.fill(.gray.opacity(0.2))
-				.aspectRatio(1, contentMode: .fit)
-				.frame(maxWidth: .infinity)
-				.overlay(
-					VStack(alignment: .center) {
-						if launch.smallPatchUrl == nil {
-							Image(systemName: "photo")
-						} else {
-							NetworkImage(imageUrl: launch.smallPatchUrl!)
-						}
+		ScrollView {
+			VStack {
+				HStack(alignment: .top) {
+					RoundedRectangle(cornerRadius: 8)
+						.fill(.gray.opacity(0.2))
+						.aspectRatio(1, contentMode: .fit)
+						.frame(maxHeight: 100)
+						.overlay(
+							VStack(alignment: .center) {
+								if launch.smallPatchUrl == nil {
+									Image(systemName: "photo")
+								} else {
+									NetworkImage(imageUrl: launch.smallPatchUrl!)
+								}
+							}
+							.padding()
+						)
+
+					VStack(alignment: .trailing) {
+						Text(launch.name)
+							.font(.largeTitle)
+							.fontWeight(.bold)
+							.multilineTextAlignment(.leading)
 					}
-					.padding()
-				)
 
-			TableItem(title: "ID", value: launch.id)
-			TableItem(title: "Name", value: launch.name)
-			TableItem(title: "Detail", value: launch.details)
+					Spacer()
+				}
 
-			Button("TEST") {}
+				TableItem(title: "ID", value: launch.id)
+				TableItem(title: "Date", value: launch.dateLocal.formatted(date: .abbreviated, time: .shortened))
+				TableItem(title: "Detail", value: launch.details)
 
-			Spacer()
+				Spacer()
+			}
+			.navigationTitle("Launch detail")
+			.padding()
 		}
-		.navigationTitle("Launch detail")
-		.navigationBarTitleDisplayMode(.inline)
-		.padding()
 	}
 }
 
