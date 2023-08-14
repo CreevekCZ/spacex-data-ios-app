@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 class LaunchTableViewCell: UITableViewCell {
@@ -25,13 +26,20 @@ class LaunchTableViewCell: UITableViewCell {
 		return description
 	}()
 
+	private var leadingImage: UIImageView = {
+		let imageView = UIImageView()
+		imageView.translatesAutoresizingMaskIntoConstraints = false
+		imageView.backgroundColor = UIColor.clear
+
+		return imageView
+	}()
+
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-
 		selectionStyle = .none
 		setupLayout()
 	}
@@ -43,20 +51,45 @@ class LaunchTableViewCell: UITableViewCell {
 
 	override func prepareForReuse() {
 		super.prepareForReuse()
+
+		launch = nil
 		titleLabel.text = nil
 		subtitle.text = nil
+		leadingImage.image = nil
 	}
 
 	func configure(launch: Launch) {
 		self.launch = launch
-
 		titleLabel.text = launch.name
 		subtitle.text = launch.id
+
+		let placeholder = UIImage(systemName: "photo")
+
+		if let url = launch.smallPatchUrl {
+			leadingImage.load(url: url, placeholder: placeholder)
+		} else {
+			leadingImage.image = placeholder
+			leadingImage.tintColor = .gray
+		}
 	}
 
 	private func setupLayout() {
+		setupLeadingImage()
 		setupTitle()
 		setupSubtitle()
+	}
+
+	private func setupLeadingImage() {
+		contentView.addSubview(leadingImage)
+
+		leadingImage.contentMode = .scaleAspectFit
+
+		NSLayoutConstraint.activate([
+			leadingImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+			leadingImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+			leadingImage.widthAnchor.constraint(equalToConstant: 50),
+			leadingImage.heightAnchor.constraint(equalToConstant: 50),
+		])
 	}
 
 	private func setupTitle() {
@@ -67,7 +100,7 @@ class LaunchTableViewCell: UITableViewCell {
 
 		NSLayoutConstraint.activate([
 			titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-			titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+			titleLabel.leftAnchor.constraint(equalTo: leadingImage.rightAnchor, constant: 5),
 			titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
 		])
 	}

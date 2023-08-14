@@ -73,8 +73,6 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		} else {
 			launchesViewModel.updateFilterSearchTerm(nil)
 		}
-		
-		tableView.reloadData()
 	}
 	
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -88,9 +86,9 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		}
 	}
 
-	func showDetailScreen(_ launch: Launch) {
+	private func showDetailScreen(_ launch: Launch) {
 		let detailScreenHostingViewController = UIHostingController(rootView: LaunchDetailView(launch: launch).environmentObject(launchesViewModel))
-
+		
 		navigationController?.pushViewController(detailScreenHostingViewController, animated: true)
 	}
 
@@ -116,7 +114,7 @@ extension LaunchesViewController {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let launch = launchesViewModel.filteredLaunches[indexPath.row]
 		
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchTableViewCell", for: indexPath) as? LaunchTableViewCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchTableViewCell") as? LaunchTableViewCell else {
 			fatalError("The dequeued cell is not an instance of LaunchTableViewCell.")
 		}
 		
@@ -124,7 +122,7 @@ extension LaunchesViewController {
 		
 		return cell
 	}
-
+	
 	func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
 		let launch = launchesViewModel.filteredLaunches[indexPath.row]
 		
@@ -153,8 +151,7 @@ extension LaunchesViewController {
 		
 		searchController.searchBar.delegate = self
 		searchController.searchBar.searchBarStyle = .minimal
-//		searchController.automaticallyShowsCancelButton = false
-		definesPresentationContext = false
+		searchController.searchBar.placeholder = "Search launches"
 		
 		tableView.tableHeaderView = searchController.searchBar
 	}

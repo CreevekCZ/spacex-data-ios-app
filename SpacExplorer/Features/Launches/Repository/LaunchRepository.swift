@@ -13,14 +13,27 @@ protocol LaunchRepository {
 }
 
 class ImplLaunchRepository: BaseRepository<Launch>, LaunchRepository {
+	enum Endpoints {
+		case launches
+		case singleLaunch(id: String)
+
+		var path: String {
+			switch self {
+			case .launches:
+				return "/launches"
+			case .singleLaunch(let id):
+				return "/launches/\(id)"
+			}
+		}
+	}
+
 	override init(host: URL, session: URLSession = .shared) {
 		super.init(host: host, session: session)
 	}
 
 	func getLaunch(launchId: String) async throws -> Launch {
 		do {
-			let launch = try await readOne(uri: "/launches/" + launchId)
-			print(launch.id)
+			let launch = try await readOne(uri: Endpoints.singleLaunch(id: launchId).path)
 			return launch
 		} catch {
 			throw error
@@ -29,7 +42,7 @@ class ImplLaunchRepository: BaseRepository<Launch>, LaunchRepository {
 
 	func getAll() async throws -> [Launch] {
 		do {
-			let launches = try await readAll(uri: "/launches")
+			let launches = try await readAll(uri: Endpoints.launches.path)
 			return launches
 		} catch {
 			throw error

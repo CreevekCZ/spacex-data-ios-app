@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct NetworkImage: View {
-	let imageUrl: URL
+	let imageUrl: URL?
 	@State private var image: UIImage? = nil
 
 	@State private var isFailed = false
 
-	init(imageUrl: URL) {
+	init(imageUrl: URL?) {
 		self.imageUrl = imageUrl
 	}
 
 	func fetchImage() {
-		URLSession.shared.dataTask(with: imageUrl) { data, _, error in
+		guard let url = imageUrl else {
+			isFailed = true
+			return
+		}
+
+		URLSession.shared.dataTask(with: url) { data, _, error in
 
 			guard let data = data, error == nil else {
 				isFailed = true
@@ -41,16 +46,19 @@ struct NetworkImage: View {
 				Image(uiImage: image)
 					.resizable()
 					.aspectRatio(contentMode: .fit)
+					.background(.clear)
 			} else {
 				if isFailed == false {
 					ProgressView()
 						.scaleEffect(2)
+						.background(.clear)
 				} else {
 					Image(systemName: "photo")
 						.resizable()
 						.foregroundColor(.gray.opacity(0.85))
 						.scaledToFit()
 						.frame(height: 100)
+						.background(.clear)
 				}
 			}
 		}
