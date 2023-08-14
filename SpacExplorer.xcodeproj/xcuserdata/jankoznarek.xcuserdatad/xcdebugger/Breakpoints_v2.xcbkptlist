@@ -82,5 +82,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63921D75-1E53-425E-8360-E6450EE299B2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpacExplorer/Features/Launches/Views/LaunchDetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "previews"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "63921D75-1E53-425E-8360-E6450EE299B2 - 10413acc2b0e5fbb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; SpacExplorer.InAppSafariView in SpacExplorer.LaunchDetailView.body.getter : some"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Features/Launches/Views/LaunchDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "648">
+               </Location>
+               <Location
+                  uuid = "63921D75-1E53-425E-8360-E6450EE299B2 - c9576426a255a1b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SpacExplorer.InAppSafariView in SpacExplorer.LaunchDetailView.body.getter : some"
+                  moduleName = "SpacExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jankoznarek/Documents/Development/Swift/iOS/spacex-data-ios-app/SpacExplorer/Features/Launches/Views/LaunchDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "648">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

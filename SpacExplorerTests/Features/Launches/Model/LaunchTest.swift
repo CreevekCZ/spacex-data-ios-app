@@ -102,5 +102,10 @@ final class LaunchTest: XCTestCase {
 
 		XCTAssertEqual(launch.largePatchUrl?.absoluteString, "https://images2.imgbox.com/5b/02/QcxHUb5V_o.png")
 		XCTAssertEqual(launch.smallPatchUrl?.absoluteString, "https://images2.imgbox.com/94/f2/NN6Ph45r_o.png")
+
+		XCTAssertEqual(launch.successLable, "Failed")
+
+		XCTAssertEqual(launch.links.wikipedia?.absoluteString, "https://en.wikipedia.org/wiki/DemoSat")
+		XCTAssertEqual(launch.links.article?.absoluteString, "https://www.space.com/2196-spacex-inaugural-falcon-1-rocket-lost-launch.html")
 	}
 }

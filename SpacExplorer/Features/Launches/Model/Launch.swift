@@ -16,6 +16,17 @@ struct Launch: Codable, Identifiable {
 	let details: String?
 	let links: Links
 
+	var successLable: String {
+		switch success {
+		case true:
+			return "Success"
+		case false:
+			return "Failed"
+		default:
+			return "–"
+		}
+	}
+
 	var smallPatchUrl: URL? {
 		return links.patch.small
 	}
@@ -26,6 +37,8 @@ struct Launch: Codable, Identifiable {
 
 	struct Links: Codable {
 		let patch: Patch
+		let wikipedia: URL?
+		let article: URL?
 	}
 
 	struct Patch: Codable {

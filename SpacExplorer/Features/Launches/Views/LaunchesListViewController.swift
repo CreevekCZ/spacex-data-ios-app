@@ -98,6 +98,8 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		launchesViewModel.objectWillChange.sink { [weak self] in
 			DispatchQueue.main.async {
 				self?.tableView.reloadData()
+				
+				self?.searchController.searchBar.text = self?.launchesViewModel.launchesFilter.searchTerm
 			}
 		}
 		.store(in: &subscriptions)
@@ -124,10 +126,10 @@ extension LaunchesViewController {
 	}
 
 	func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+		let launch = launchesViewModel.filteredLaunches[indexPath.row]
+		
 		searchController.searchBar.endEditing(true)
 		
-		let launch = launchesViewModel.launches[indexPath.row]
-
 		showDetailScreen(launch)
 	}
 }
@@ -151,6 +153,8 @@ extension LaunchesViewController {
 		
 		searchController.searchBar.delegate = self
 		searchController.searchBar.searchBarStyle = .minimal
+//		searchController.automaticallyShowsCancelButton = false
+		definesPresentationContext = false
 		
 		tableView.tableHeaderView = searchController.searchBar
 	}

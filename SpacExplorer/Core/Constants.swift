@@ -14,4 +14,8 @@ struct Constants {
 		case launches
 		case singleLaunch(id: String)
 	}
+
+	enum UserDefaultsKey: String {
+		case launchesFilter
+	}
 }

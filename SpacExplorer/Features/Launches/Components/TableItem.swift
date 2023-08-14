@@ -11,20 +11,15 @@ struct TableItem: View {
 	let title: String?
 	let value: String?
 
-	init(title: String?, value: String?) {
-		self.title = title
-		self.value = value
-	}
-
 	var body: some View {
 		HStack(alignment: .top) {
 			Text(title ?? "")
-				.fontWeight(.bold)
+				.fontWeight(.regular)
 
 			Spacer()
 
 			Text(value ?? "")
-				.textSelection(.enabled)
+				.foregroundColor(Color.secondary)
 		}
 		.padding(.vertical, 2)
 	}
@@ -33,5 +28,6 @@ struct TableItem: View {
 struct TableItem_Previews: PreviewProvider {
 	static var previews: some View {
 		TableItem(title: "Test", value: "Test value")
+			.previewLayout(.sizeThatFits)
 	}
 }

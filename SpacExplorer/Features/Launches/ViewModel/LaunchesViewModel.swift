@@ -27,9 +27,30 @@ class LaunchesViewModel: ObservableObject {
 	init(launchRepository: LaunchRepository = ImplLaunchRepository(host: Constants.apiAddress)) {
 		self.launchRepository = launchRepository
 		launchesFilter = LaunchesFilter()
+
+		loadFilter()
 	}
 
-	private func cacheFilter() {}
+	private func saveFilter() {
+		do {
+			let data = try JSONEncoder().encode(launchesFilter)
+			UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.launchesFilter.rawValue)
+		} catch {
+			delegateView?.showError(errorMessage: "Error encoding launches filter: \(error.localizedDescription)")
+		}
+
+		objectWillChange.send()
+	}
+
+	private func loadFilter() {
+		if let data = UserDefaults.standard.data(forKey: Constants.UserDefaultsKey.launchesFilter.rawValue) {
+			do {
+				launchesFilter = try JSONDecoder().decode(LaunchesFilter.self, from: data)
+			} catch {
+				delegateView?.showError(errorMessage: "Error decoding launches filter: \(error.localizedDescription)")
+			}
+		}
+	}
 
 	func loadLaunches() async {
 		do {
@@ -42,10 +63,22 @@ class LaunchesViewModel: ObservableObject {
 	}
 
 	func updateFilterSearchTerm(_ searchTerm: String?) {
+		if launchesFilter.searchTerm == searchTerm {
+			return
+		}
+
 		launchesFilter.searchTerm = searchTerm
+
+		saveFilter()
 	}
 
 	func updateFilterOption(_ filterOption: LaunchesFilter.LaunchFilterOption) {
+		if launchesFilter.filterOption == filterOption {
+			return
+		}
+
 		launchesFilter.filterOption = filterOption
+
+		saveFilter()
 	}
 }
