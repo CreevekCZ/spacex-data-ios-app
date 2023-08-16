@@ -20,11 +20,7 @@ struct LaunchDetailHeader: View {
 					.frame(maxHeight: 80)
 					.overlay(
 						VStack(alignment: .center) {
-							if launch.smallPatchUrl == nil {
-								Image(systemName: "photo")
-							} else {
-								NetworkImage(imageUrl: launch.smallPatchUrl!)
-							}
+							NetworkImage(imageUrl: launch.smallPatchUrl)
 						}
 						.padding()
 					)

@@ -11,19 +11,33 @@ import SwiftUI
 import UIKit
 
 class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
-	var launchesViewModel: LaunchesViewModel!
+	private let launchesViewModel: LaunchesViewModel
+	private let tableView: UITableView
+	private let searchController: UISearchController
+	private let refreshControl: UIRefreshControl
+	private var rightBarButton: UIBarButtonItem
+	private var subscriptions: Set<AnyCancellable>
 	
-	private var tableView: UITableView!
-	private var searchController: UISearchController!
-	private var refreshControl: UIRefreshControl!
-	private var rightBarButton: UIBarButtonItem!
+	init(
+		launchesViewModel: LaunchesViewModel = LaunchesViewModel()
+	) {
+		self.launchesViewModel = launchesViewModel
+		self.tableView = UITableView(frame: .zero, style: .insetGrouped)
+		self.searchController = UISearchController()
+		self.refreshControl = UIRefreshControl()
+		self.rightBarButton = UIBarButtonItem()
+		self.subscriptions = Set<AnyCancellable>()
+		
+		super.init(nibName: nil, bundle: nil)
+	}
 	
-	private var subscriptions = Set<AnyCancellable>()
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		launchesViewModel = LaunchesViewModel()
 		
 		launchesViewModel.delegateView = self
 		
@@ -34,19 +48,19 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		loadLaunches()
 	}
 	
-	@objc func showFilterActionSheet() {
+	@objc private func showFilterActionSheet() {
 		searchController.searchBar.endEditing(true)
 		
 		let actionSheet = UIAlertController(title: "Filter", message: nil, preferredStyle: .actionSheet)
 
 		let allAction = UIAlertAction(title: "All", style: .default) { [weak self] _ in
-			self?.applyFilter(.all)
+			self?.launchesViewModel.updateFilterOption(.all)
 		}
 		let upcomingAction = UIAlertAction(title: "Upcoming", style: .default) { [weak self] _ in
-			self?.applyFilter(.upcoming)
+			self?.launchesViewModel.updateFilterOption(.upcoming)
 		}
 		let pastAction = UIAlertAction(title: "Past", style: .default) { [weak self] _ in
-			self?.applyFilter(.past)
+			self?.launchesViewModel.updateFilterOption(.past)
 		}
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -59,14 +73,6 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		present(actionSheet, animated: true, completion: nil)
 	}
 	
-	internal func applyFilter(_ option: LaunchesFilter.LaunchFilterOption) {
-		launchesViewModel.updateFilterOption(option)
-		rightBarButton.title =
-			launchesViewModel.launchesFilter.filterOption.rawValue
-		
-		tableView.reloadData()
-	}
-
 	func updateSearchResults(for searchController: UISearchController) {
 		if let searchText = searchController.searchBar.text, !searchText.isEmpty {
 			launchesViewModel.updateFilterSearchTerm(searchText)
@@ -75,11 +81,7 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		}
 	}
 	
-	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-		searchController.isActive = false
-	}
-	
-	@objc func loadLaunches() {
+	@objc private func loadLaunches() {
 		Task { [weak self] in
 			await self?.launchesViewModel.loadLaunches()
 			self?.refreshControl.endRefreshing()
@@ -87,7 +89,9 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 	}
 
 	private func showDetailScreen(_ launch: Launch) {
-		let detailScreenHostingViewController = UIHostingController(rootView: LaunchDetailView(launch: launch).environmentObject(launchesViewModel))
+		let detailScreenHostingViewController = UIHostingController(
+			rootView: LaunchDetailView(launch: launch)
+		)
 		
 		navigationController?.pushViewController(detailScreenHostingViewController, animated: true)
 	}
@@ -98,6 +102,9 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 				self?.tableView.reloadData()
 				
 				self?.searchController.searchBar.text = self?.launchesViewModel.launchesFilter.searchTerm
+				
+				self?.rightBarButton.title =
+					self?.launchesViewModel.currentFilterLabel
 			}
 		}
 		.store(in: &subscriptions)
@@ -145,25 +152,25 @@ extension LaunchesViewController {
 	}
 	
 	private func setupSearchController() {
-		searchController = UISearchController()
 		searchController.searchResultsUpdater = self
-		searchController.hidesNavigationBarDuringPresentation = false
+		searchController.obscuresBackgroundDuringPresentation = false
 		
-		searchController.searchBar.delegate = self
 		searchController.searchBar.searchBarStyle = .minimal
-		searchController.searchBar.placeholder = "Search launches"
+		searchController.searchBar.delegate = self
+		searchController.searchBar.placeholder = "Search Launches"
+
+		definesPresentationContext = true
 		
 		tableView.tableHeaderView = searchController.searchBar
 	}
 	
 	private func setupRefreshControl() {
-		refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(loadLaunches), for: .valueChanged)
+		refreshControl.backgroundColor = UIColor.systemBackground
 		tableView.refreshControl = refreshControl
 	}
 	
 	private func setupTableView() {
-		let tableView = UITableView(frame: view.bounds, style: .insetGrouped)
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: "LaunchTableViewCell")
@@ -175,14 +182,17 @@ extension LaunchesViewController {
 		
 		view.addSubview(tableView)
 		
-		self.tableView = tableView
-		
 		NSLayoutConstraint.activate([
 			tableView.topAnchor.constraint(equalTo: view.topAnchor),
 			tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
 		])
+	}
+	
+	@objc func unfocusAll() {
+		print("unfocusAll")
+		searchController.searchBar.endEditing(true)
 	}
 	
 	private func setupRightBarButton() {

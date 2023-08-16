@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		101C5E0D2A8BBDF4005BE9E0 /* LaunchesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C5E0C2A8BBDF4005BE9E0 /* LaunchesViewModelTest.swift */; };
+		101C5E122A8BC51B005BE9E0 /* MockLaunchesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C5E0F2A8BBF2D005BE9E0 /* MockLaunchesRepository.swift */; };
+		101C5E132A8CF626005BE9E0 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37D2A7D0B0800EEDFBD /* Launch.swift */; };
+		101C5E142A8CF62A005BE9E0 /* LaunchesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */; };
+		101C5E152A8CF632005BE9E0 /* LaunchesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B3782A7BDD9E00EEDFBD /* LaunchesListViewController.swift */; };
+		101C5E162A8CF635005BE9E0 /* LaunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107B1B4F2A80E99900BC3FB8 /* LaunchDetailView.swift */; };
+		101C5E172A8CF640005BE9E0 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102364722A85172F001B2D91 /* RepositoryError.swift */; };
+		101C5E182A8CF676005BE9E0 /* LaunchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107B1B592A8119A000BC3FB8 /* LaunchRepository.swift */; };
+		101C5E1B2A8CF6EA005BE9E0 /* MockLaunchesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C5E1A2A8CF6EA005BE9E0 /* MockLaunchesData.swift */; };
 		1023646E2A84E65C001B2D91 /* LaunchesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */; };
 		102364702A84FBDE001B2D91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023646F2A84FBDE001B2D91 /* Constants.swift */; };
 		102364732A85172F001B2D91 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102364722A85172F001B2D91 /* RepositoryError.swift */; };
@@ -14,7 +23,6 @@
 		1069B37C2A7CF43C00EEDFBD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37B2A7CF43C00EEDFBD /* BaseViewController.swift */; };
 		1069B37E2A7D0B0800EEDFBD /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37D2A7D0B0800EEDFBD /* Launch.swift */; };
 		1069B3832A7D105D00EEDFBD /* LaunchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B3822A7D105D00EEDFBD /* LaunchTest.swift */; };
-		1069B3842A7D13C100EEDFBD /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1069B37D2A7D0B0800EEDFBD /* Launch.swift */; };
 		107B1B4E2A80DEEA00BC3FB8 /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107B1B4D2A80DEEA00BC3FB8 /* LaunchTableViewCell.swift */; };
 		107B1B502A80E99900BC3FB8 /* LaunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107B1B4F2A80E99900BC3FB8 /* LaunchDetailView.swift */; };
 		107B1B552A81036200BC3FB8 /* NetworkImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107B1B542A81036200BC3FB8 /* NetworkImage.swift */; };
@@ -54,6 +62,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		101C5E0C2A8BBDF4005BE9E0 /* LaunchesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewModelTest.swift; sourceTree = "<group>"; };
+		101C5E0F2A8BBF2D005BE9E0 /* MockLaunchesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLaunchesRepository.swift; sourceTree = "<group>"; };
+		101C5E1A2A8CF6EA005BE9E0 /* MockLaunchesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLaunchesData.swift; sourceTree = "<group>"; };
 		1023646D2A84E65C001B2D91 /* LaunchesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesFilter.swift; sourceTree = "<group>"; };
 		1023646F2A84FBDE001B2D91 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		102364722A85172F001B2D91 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
@@ -111,6 +122,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		101C5E0B2A8BBDCA005BE9E0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				101C5E192A8CF6B7005BE9E0 /* Mock */,
+				101C5E0C2A8BBDF4005BE9E0 /* LaunchesViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		101C5E192A8CF6B7005BE9E0 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				101C5E0F2A8BBF2D005BE9E0 /* MockLaunchesRepository.swift */,
+				101C5E1A2A8CF6EA005BE9E0 /* MockLaunchesData.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		102364712A851711001B2D91 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +220,7 @@
 		1069B3802A7D103C00EEDFBD /* Launches */ = {
 			isa = PBXGroup;
 			children = (
+				101C5E0B2A8BBDCA005BE9E0 /* ViewModel */,
 				1069B3812A7D104300EEDFBD /* Model */,
 			);
 			path = Launches;
@@ -448,9 +478,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				101C5E122A8BC51B005BE9E0 /* MockLaunchesRepository.swift in Sources */,
+				101C5E1B2A8CF6EA005BE9E0 /* MockLaunchesData.swift in Sources */,
 				1069B3832A7D105D00EEDFBD /* LaunchTest.swift in Sources */,
-				1069B3842A7D13C100EEDFBD /* Launch.swift in Sources */,
+				101C5E182A8CF676005BE9E0 /* LaunchRepository.swift in Sources */,
+				101C5E162A8CF635005BE9E0 /* LaunchDetailView.swift in Sources */,
+				101C5E152A8CF632005BE9E0 /* LaunchesListViewController.swift in Sources */,
+				101C5E142A8CF62A005BE9E0 /* LaunchesFilter.swift in Sources */,
+				101C5E0D2A8BBDF4005BE9E0 /* LaunchesViewModelTest.swift in Sources */,
+				101C5E132A8CF626005BE9E0 /* Launch.swift in Sources */,
 				1093783D2A7942D400CC58E8 /* SpacExplorerTests.swift in Sources */,
+				101C5E172A8CF640005BE9E0 /* RepositoryError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

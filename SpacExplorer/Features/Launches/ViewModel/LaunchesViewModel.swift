@@ -14,7 +14,7 @@ protocol LaunchesViewModelDelegate {
 
 class LaunchesViewModel: ObservableObject {
 	private let launchRepository: LaunchRepository
-	private(set) var launchesFilter: LaunchesFilter!
+	private(set) var launchesFilter: LaunchesFilter
 
 	@Published private(set) var launches: [Launch] = []
 
@@ -24,7 +24,13 @@ class LaunchesViewModel: ObservableObject {
 		return launchesFilter.filterLaunches(launches)
 	}
 
-	init(launchRepository: LaunchRepository = ImplLaunchRepository(host: Constants.apiAddress)) {
+	var currentFilterLabel: String {
+		return launchesFilter.filterOption.rawValue
+	}
+
+	init(
+		launchRepository: LaunchRepository = ImplLaunchRepository(host: Constants.apiAddress)
+	) {
 		self.launchRepository = launchRepository
 		launchesFilter = LaunchesFilter()
 
