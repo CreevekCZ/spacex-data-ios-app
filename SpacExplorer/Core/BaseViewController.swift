@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class BaseViewController: UIViewController, LaunchesViewModelDelegate {
+	weak var coordinator: MainCoordinator?
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 

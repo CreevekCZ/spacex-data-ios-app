@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Launch: Codable, Identifiable {
+struct Launch: Codable, Identifiable, Equatable {
 	let id: String
 	let name: String
 	let upcoming: Bool
@@ -54,5 +54,14 @@ struct Launch: Codable, Identifiable {
 		case success
 		case details
 		case links
+	}
+
+	static func == (lhs: Launch, rhs: Launch) -> Bool {
+		return lhs.id == rhs.id &&
+			lhs.name == rhs.name &&
+			lhs.upcoming == rhs.upcoming &&
+			lhs.dateLocal == rhs.dateLocal &&
+			lhs.success == rhs.success &&
+			lhs.details == rhs.details
 	}
 }

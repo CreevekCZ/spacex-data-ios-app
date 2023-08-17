@@ -88,14 +88,6 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		}
 	}
 
-	private func showDetailScreen(_ launch: Launch) {
-		let detailScreenHostingViewController = UIHostingController(
-			rootView: LaunchDetailView(launch: launch)
-		)
-		
-		navigationController?.pushViewController(detailScreenHostingViewController, animated: true)
-	}
-
 	private func subscribe() {
 		launchesViewModel.objectWillChange.sink { [weak self] in
 			DispatchQueue.main.async {
@@ -133,9 +125,7 @@ extension LaunchesViewController {
 	func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
 		let launch = launchesViewModel.filteredLaunches[indexPath.row]
 		
-		searchController.searchBar.endEditing(true)
-		
-		showDetailScreen(launch)
+		coordinator?.goToLaunchDetail(launch: launch)
 	}
 }
 

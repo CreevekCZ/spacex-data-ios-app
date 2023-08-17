@@ -12,7 +12,7 @@ enum MockLaunchesData {
 		id: "5eb87cd9ffd86e000604b32b",
 		name: "Starlink-1",
 		upcoming: false,
-		dateLocal: Date(),
+		dateLocal: Date().addingTimeInterval(-86400),
 		success: true,
 		details: "This is another test launch",
 		links: Launch.Links(
@@ -30,12 +30,14 @@ enum MockLaunchesData {
 		)
 	)
 
+//	MARK: - ----------------------------------------------------------------
+
 	static let multipleLaunches = [
 		Launch(
 			id: "5eb87cd9ffd86e000604b32b",
 			name: "Starlink-1",
 			upcoming: false,
-			dateLocal: Date(),
+			dateLocal: Date().addingTimeInterval(-86400),
 			success: true,
 			details: "This is another test launch",
 			links: Launch.Links(
@@ -52,7 +54,7 @@ enum MockLaunchesData {
 			id: "5eb87cd9ffd86e000604b32c",
 			name: "Starlink-2",
 			upcoming: false,
-			dateLocal: Date(),
+			dateLocal: Date().addingTimeInterval(-86400),
 			success: true,
 			details: "This is another test launch",
 			links: Launch.Links(
@@ -69,7 +71,7 @@ enum MockLaunchesData {
 			id: "5eb87cd9ffd86e000604b32d",
 			name: "Starlink-3",
 			upcoming: false,
-			dateLocal: Date(),
+			dateLocal: Date().addingTimeInterval(-86400),
 			success: true,
 			details: "This is another test launch",
 			links: Launch.Links(
@@ -85,8 +87,8 @@ enum MockLaunchesData {
 		Launch(
 			id: "5eb87cd9ffd86e000604b32e",
 			name: "Starlink-4",
-			upcoming: false,
-			dateLocal: Date(),
+			upcoming: true,
+			dateLocal: Date().addingTimeInterval(86400),
 			success: true,
 			details: "This is another test launch",
 			links: Launch.Links(
@@ -101,9 +103,9 @@ enum MockLaunchesData {
 
 		Launch(
 			id: "5eb87cd9ffd86e000604b32f",
-			name: "Starlink-5",
-			upcoming: false,
-			dateLocal: Date(),
+			name: "DART",
+			upcoming: true,
+			dateLocal: Date().addingTimeInterval(86400),
 			success: true,
 			details: "This is another test launch",
 			links: Launch.Links(

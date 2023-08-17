@@ -15,6 +15,7 @@ protocol LaunchesViewModelDelegate {
 class LaunchesViewModel: ObservableObject {
 	private let launchRepository: LaunchRepository
 	private(set) var launchesFilter: LaunchesFilter
+	private var userDefaults: UserDefaults
 
 	@Published private(set) var launches: [Launch] = []
 
@@ -29,10 +30,13 @@ class LaunchesViewModel: ObservableObject {
 	}
 
 	init(
-		launchRepository: LaunchRepository = ImplLaunchRepository(host: Constants.apiAddress)
+		launchRepository: LaunchRepository = ImplLaunchRepository(host: Constants.apiAddress),
+		userDefaults: UserDefaults = UserDefaults.standard,
+		launchesFilter: LaunchesFilter = LaunchesFilter()
 	) {
 		self.launchRepository = launchRepository
-		launchesFilter = LaunchesFilter()
+		self.userDefaults = userDefaults
+		self.launchesFilter = launchesFilter
 
 		loadFilter()
 	}
@@ -40,7 +44,7 @@ class LaunchesViewModel: ObservableObject {
 	private func saveFilter() {
 		do {
 			let data = try JSONEncoder().encode(launchesFilter)
-			UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.launchesFilter.rawValue)
+			userDefaults.set(data, forKey: Constants.UserDefaultsKey.launchesFilter.rawValue)
 		} catch {
 			delegateView?.showError(errorMessage: "Error encoding launches filter: \(error.localizedDescription)")
 		}
@@ -49,7 +53,7 @@ class LaunchesViewModel: ObservableObject {
 	}
 
 	private func loadFilter() {
-		if let data = UserDefaults.standard.data(forKey: Constants.UserDefaultsKey.launchesFilter.rawValue) {
+		if let data = userDefaults.data(forKey: Constants.UserDefaultsKey.launchesFilter.rawValue) {
 			do {
 				launchesFilter = try JSONDecoder().decode(LaunchesFilter.self, from: data)
 			} catch {
