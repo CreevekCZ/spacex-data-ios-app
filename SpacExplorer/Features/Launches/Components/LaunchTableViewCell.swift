@@ -34,6 +34,14 @@ class LaunchTableViewCell: UITableViewCell {
 		return imageView
 	}()
 
+	private var stackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .vertical
+
+		return stackView
+	}()
+
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
@@ -75,8 +83,13 @@ class LaunchTableViewCell: UITableViewCell {
 
 	private func setupLayout() {
 		setupLeadingImage()
+		setupStackView()
 		setupTitle()
 		setupSubtitle()
+
+		NSLayoutConstraint.activate([
+			contentView.heightAnchor.constraint(equalToConstant: 50),
+		])
 	}
 
 	private func setupLeadingImage() {
@@ -88,7 +101,18 @@ class LaunchTableViewCell: UITableViewCell {
 			leadingImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 			leadingImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
 			leadingImage.widthAnchor.constraint(equalToConstant: 50),
-			leadingImage.heightAnchor.constraint(equalToConstant: 50),
+			leadingImage.heightAnchor.constraint(equalToConstant: 40),
+		])
+	}
+
+	private func setupStackView() {
+		contentView.addSubview(stackView)
+
+		NSLayoutConstraint.activate([
+			stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+			stackView.leftAnchor.constraint(equalTo: leadingImage.rightAnchor, constant: 5),
+			stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+			stackView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
 		])
 	}
 
@@ -96,27 +120,13 @@ class LaunchTableViewCell: UITableViewCell {
 		titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
 		titleLabel.textColor = UIColor.label
 
-		contentView.addSubview(titleLabel)
-
-		NSLayoutConstraint.activate([
-			titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-			titleLabel.leftAnchor.constraint(equalTo: leadingImage.rightAnchor, constant: 5),
-			titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
-		])
+		stackView.addArrangedSubview(titleLabel)
 	}
 
 	private func setupSubtitle() {
 		subtitle.font = UIFont.systemFont(ofSize: 14)
 		subtitle.textColor = UIColor.secondaryLabel
 
-		contentView.addSubview(subtitle)
-
-		NSLayoutConstraint.activate([
-			subtitle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-			subtitle.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-			subtitle.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-			subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-
-		])
+		stackView.addArrangedSubview(subtitle)
 	}
 }

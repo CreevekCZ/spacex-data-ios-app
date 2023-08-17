@@ -41,7 +41,9 @@ final class MainCoordinator: Coordinator {
 		let detailScreenHostingViewController = HostingController(
 			rootView: {
 				LaunchDetailView(launch: launch)
-			}, coordinator: self
+
+			},
+			coordinator: self
 		)
 
 		navigationController.pushViewController(detailScreenHostingViewController, animated: true)
