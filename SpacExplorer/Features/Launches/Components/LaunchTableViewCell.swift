@@ -86,10 +86,6 @@ class LaunchTableViewCell: UITableViewCell {
 		setupStackView()
 		setupTitle()
 		setupSubtitle()
-
-		NSLayoutConstraint.activate([
-			contentView.heightAnchor.constraint(equalToConstant: 50),
-		])
 	}
 
 	private func setupLeadingImage() {
@@ -112,7 +108,7 @@ class LaunchTableViewCell: UITableViewCell {
 			stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 			stackView.leftAnchor.constraint(equalTo: leadingImage.rightAnchor, constant: 5),
 			stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-			stackView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+			stackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -10),
 		])
 	}
 

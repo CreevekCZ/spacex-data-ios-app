@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol LaunchesViewModelDelegate {
+protocol ViewModelErrorDelegate {
 	func showError(errorMessage: String)
 }
 
@@ -19,7 +19,7 @@ class LaunchesViewModel: ObservableObject {
 
 	@Published private(set) var launches: [Launch] = []
 
-	var delegateView: LaunchesViewModelDelegate?
+	var delegateView: ViewModelErrorDelegate?
 
 	var filteredLaunches: [Launch] {
 		return launchesFilter.filterLaunches(launches)
@@ -90,5 +90,11 @@ class LaunchesViewModel: ObservableObject {
 		launchesFilter.filterOption = filterOption
 
 		saveFilter()
+	}
+
+	func getLaunches(by ids: [String]) -> [Launch] {
+		return launches.filter { launch in
+			ids.contains(launch.id)
+		}
 	}
 }

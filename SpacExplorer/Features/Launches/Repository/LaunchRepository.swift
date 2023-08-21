@@ -12,7 +12,7 @@ protocol LaunchRepository {
 	func getAll() async throws -> [Launch]
 }
 
-class ImplLaunchRepository: BaseRepository<Launch>, LaunchRepository {
+final class ImplLaunchRepository: BaseRepository<Launch>, LaunchRepository {
 	enum Endpoints {
 		case launches
 		case singleLaunch(id: String)

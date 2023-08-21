@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController, LaunchesViewModelDelegate {
+class BaseViewController: UIViewController, ViewModelErrorDelegate {
 	weak var coordinator: MainCoordinator?
 
 	override func viewDidLoad() {

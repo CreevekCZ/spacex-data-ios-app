@@ -29,6 +29,8 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 		self.subscriptions = Set<AnyCancellable>()
 		
 		super.init(nibName: nil, bundle: nil)
+
+		tabBarItem = UITabBarItem(title: "Launches", image: "🚀".emojiToImage(), tag: 0)
 	}
 	
 	@available(*, unavailable)
@@ -103,7 +105,7 @@ class LaunchesViewController: BaseViewController, UITableViewDelegate, UITableVi
 	}
 }
 
-// MARK: TableView methods
+// MARK: - TableView methods
 
 extension LaunchesViewController {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -166,6 +168,7 @@ extension LaunchesViewController {
 		tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: "LaunchTableViewCell")
 		
 		tableView.keyboardDismissMode = .onDrag
+		tableView.rowHeight = 60
 		
 		tableView.dataSource = self
 		tableView.delegate = self

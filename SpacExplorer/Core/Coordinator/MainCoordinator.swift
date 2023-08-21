@@ -8,25 +8,40 @@
 import Foundation
 import UIKit
 
-final class MainCoordinator: Coordinator {
+final class MainCoordinator: Coordinator, ObservableObject {
 	var childCoordinators = [Coordinator]()
 
 	var navigationController: UINavigationController
-	var window: UIWindow
+	private var window: UIWindow
+
+	private var launchesViewModel: LaunchesViewModel
+	private var crewViewModel: CrewViewModel
 
 	init(
 		navigationController: UINavigationController,
-		window: UIWindow
+		window: UIWindow,
+		launchesViewModel: LaunchesViewModel = LaunchesViewModel(),
+		crewViewModel: CrewViewModel = CrewViewModel()
 	) {
 		self.navigationController = navigationController
 		self.window = window
+		self.launchesViewModel = launchesViewModel
+		self.crewViewModel = crewViewModel
 	}
 
 	func start() {
-		let launchesViewController = LaunchesViewController()
+		let launchesViewController = LaunchesViewController(launchesViewModel: launchesViewModel)
 		launchesViewController.coordinator = self
 
-		navigationController.pushViewController(launchesViewController, animated: true)
+		let crewViewController = CrewViewController(crewViewModel: crewViewModel)
+		crewViewController.coordinator = self
+
+		let mainTapViewController = MainTabBarViewController(
+			launchesListViewController: launchesViewController,
+			crewViewController: crewViewController
+		)
+
+		navigationController.pushViewController(mainTapViewController, animated: true)
 	}
 
 	func goBackToRoot() {
@@ -41,11 +56,20 @@ final class MainCoordinator: Coordinator {
 		let detailScreenHostingViewController = HostingController(
 			rootView: {
 				LaunchDetailView(launch: launch)
-
-			},
-			coordinator: self
+					.environmentObject(self)
+			}
 		)
 
 		navigationController.pushViewController(detailScreenHostingViewController, animated: true)
+	}
+
+	func goToCrewDetail(crew: Crew) {
+		let crewDetailHostingController = HostingController {
+			CrewDetailView(crew: crew)
+				.environmentObject(launchesViewModel)
+				.environmentObject(self)
+		}
+
+		navigationController.pushViewController(crewDetailHostingController, animated: true)
 	}
 }
